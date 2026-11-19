@@ -1,0 +1,8 @@
+# Obsidian's own UI state: which panes are open, where the cursor was.
+# It changes every time the app is touched and says nothing about the notes.
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+
+.trash/
+.DS_Store
+Thumbs.db
