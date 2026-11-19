@@ -61,6 +61,23 @@ Business Suite kullanmak hesabı Business'a çevirmez; Creator kalabilir.
 kısa olanlar daha iyi gidebilir. [[posted]] tablosu birkaç parti sonra bunu
 söyleyecek — şimdiden kuralları değiştirmeye gerek yok.
 
+## Yedek
+
+İki ayrı **private** GitHub reposu:
+
+| Repo | Ne var |
+|---|---|
+| `clipmaker` | Program. Videolar ve kuyruk dosyaları dışarıda |
+| `clipping-brain` | Bu vault. Obsidian'ın pencere durumu dışarıda |
+
+Private: sadece Yaser ve davet ettikleri görür.
+
+Değişiklikten sonra:
+
+```powershell
+cd C:\Users\Trevo\clipping-brain; git add -A; git commit -m "brain: log"; git push
+```
+
 ## Kaç post, ne sıklıkta
 
 | | Günlük |
