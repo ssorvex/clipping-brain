@@ -28,9 +28,12 @@ Her klip üçünden birine giriyor.
 
 | Kalıp | Ne zaman | Örnek |
 |---|---|---|
+| **B — Sahne** ⭐ | Oyun içi bir an anlatılıyor — **çoğu klip** | Klibin gerçek karesi + logo + 2 kelime |
 | **A — Nesne** | Bir eşya, silah, araç, menü konuşuluyor | Gradyan üstünde havada duran polis arabası |
-| **B — Sahne** | Oyun içi bir an anlatılıyor | Gerçek oyun görüntüsü + logo + 2 kelime |
 | **C — Sayı** | Liste, sayaç, tarih, fiyat | Dev rakam + logo |
+
+B varsayılan: arka plan **üretilmiyor, klipten alınıyor.** A ve C ancak
+klipte gösterilecek tek bir kare yoksa.
 
 ---
 
@@ -60,28 +63,56 @@ no multi-colour stacked lettering, no drop shadows on text, no arrows,
 no illustrated characters, no watermarks.
 ```
 
-## B — Sahne (oyun görüntüsü)
+## B — Sahne (klibin kendi karesi)  ← varsayılan
+
+**Arka planı ChatGPT'ye hayal ettirmiyoruz.** Klibin gerçek karesini
+ekliyoruz. Kapak ile video aynı şeyi gösteriyor; izleyici tıkladığında
+gördüğü şey kapaktaki şey oluyor. Üretilen sahnede bu olmuyor.
+
+Önce kareleri çıkar (aşağıda), `thumbs.jpg`'den birini seç, o kareyi
+ChatGPT'ye **yükle** ve şunu yaz:
 
 ```
-YouTube Shorts thumbnail, vertical 9:16, 1080x1920.
+Use the attached image as the background. Do not redraw it, do not
+change the scene — keep it photographic and untouched.
 
-Background: a cinematic Grand Theft Auto VI gameplay frame — [SAHNE].
-Photoreal game-engine look, warm Miami light, slightly darkened and
-very slightly blurred so the foreground stays readable.
+Output: vertical 9:16, 1080x1920. Fill the frame with the attached
+image: scale it to cover the width, and extend the top and bottom with
+a blurred, slightly darkened copy of itself rather than bars.
 
 Overlay: the Grand Theft Auto VI logo, large, centred in the upper
-third. Crisp and untouched: white "GRAND THEFT AUTO" wordmark above a
-tall pink-to-orange gradient "VI".
+third. Crisp and untouched — the white "GRAND THEFT AUTO" wordmark
+above a tall pink-to-orange gradient "VI". Add a soft dark gradient
+behind it so it stays readable.
 
 Text: the words "[2-4 KELIME]" at the very bottom, bold condensed white
 sans-serif, uppercase, small — no taller than 7% of the image.
 
-Optional pointer: one thin red arrow pointing at [NE], nothing more.
+Optional: one thin red arrow pointing at [NE]. Nothing else.
 
-Style: clean, high contrast, plenty of empty space around the logo. No
-outlined word-art, no stacked multi-colour lettering, no illustrated
-people, no extra text, no watermarks.
+No outlined word-art, no stacked multi-colour lettering, no added
+people or objects, no extra text, no watermarks.
 ```
+
+### Kareleri çıkarma
+
+```powershell
+python -m cm.stills "clips\<parti>\<klip klasoru>" --count 6 --band 0.32:0.91
+```
+
+Klip klasörüne `thumb-1.jpg` ... `thumb-6.jpg` ve hepsini yan yana
+gösteren `thumbs.jpg` düşüyor. `thumbs.jpg`'ye bak, birini seç.
+
+| | |
+|---|---|
+| **Altyazı** | Kareler `captions.ass`'teki sessizliklerden alınıyor — üstünde yazı olmuyor |
+| **Karanlık kare** | Çok koyu ve çok parlak kareler eleniyor |
+| **Benzer kare** | Aynı sahneden iki kare gelmiyor, zamana yayılıyor |
+| **`--band`** | Üstteki facecam kutusunu ve alttaki bulanık şeridi kesiyor |
+
+`--band` kaynağa göre değişiyor. Önce `--band` olmadan çalıştır,
+`thumbs.jpg`'ye bak, facecam nerede bitiyorsa oranı ver. Typical Gamer
+için `0.32:0.91`.
 
 ## C — Sayı
 
@@ -111,13 +142,14 @@ word-art, no stacked lettering, no people, no city, no watermarks.
 
 | Klip | Kalıp | Nesne / sahne | Kelimeler |
 |---|---|---|---|
-| Uçak çalma + paraşüt | B | a stolen jet banking over the Vice City skyline at dusk | `PLANE THEFT` |
+| Uçak çalma + paraşüt | B | `thumb-3.jpg` — uçaktan atlamış, şehir altta | `PLANE THEFT` |
 | Polis kıyafetini tarif ediyor | A | a police cruiser's in-car computer screen | `THEY SAW YOU` |
 | 62 saat sonra inceleme | C | `62` | `HOURS IN` |
 | Hava durumu güncellemesi | B | a thunderstorm rolling over the beach | `WEATHER` |
 
 ## Kontrol — göndermeden önce
 
+- [ ] Arka plan **klibin kendi karesi** mi (üretilmiş sahne değil)
 - [ ] Logo büyük, net ve **değiştirilmemiş** mi
 - [ ] Toplam **4 kelimeden az** yazı var mı
 - [ ] Telefon boyutunda (küçült, bak) hâlâ okunuyor mu
