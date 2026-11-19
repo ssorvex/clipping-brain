@@ -28,6 +28,7 @@ Kendiliğinden yazılıyor — elle düzenlemeye gerek yok.
 
 - `posts/` — **günlük kopyala-yapıştır sayfası** (otomatik)
 - [[system]] — sistem nasıl çalışıyor, sabah rutini
+- [[thumbnails]] — kapak görseli promptu (ChatGPT'ye yapıştır)
 - [[posted]] — ne yayınlandı, nasıl gitti
 - [[decisions]] — neyi neden seçtik, neyi reddettik
 - `journal/` — günlük kayıt
